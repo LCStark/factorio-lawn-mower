@@ -1,0 +1,7 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.1.0
+Date: 2024-07-05
+  Major Features:
+    - removes decorations under constructed buildings (with configurable range)
+    - adds lawn mower tool for manual decoration clearing
+    - clears enemy corpses
