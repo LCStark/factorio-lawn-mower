@@ -1,9 +1,9 @@
 {
     "name": "lawn-mower",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "title": "Lawn Mower",
     "author": "LCStark",
     "description": "Adds several options to remove terrain decorations.",
     "dependencies": ["base>=1.1.0"],
-    "factorio_version": "1.1"
+    "factorio_version": "2.0"
 }
