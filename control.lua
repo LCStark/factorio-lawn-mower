@@ -33,17 +33,17 @@ script.on_event(defines.events.on_player_alt_selected_area, function(event)
 end)
 
 script.on_event(defines.events.on_built_entity, function(event)
-  if event.created_entity == nil or event.created_entity.type == "entity-ghost" or event.created_entity.type == "tile-ghost" or not event.created_entity.prototype.selectable_in_game then return end
-  local surface = game.surfaces[event.created_entity.surface_index]
-  local area = event.created_entity.selection_box
+  if event.entity == nil or event.entity.type == "entity-ghost" or event.entity.type == "tile-ghost" or not event.entity.prototype.selectable_in_game then return end
+  local surface = game.surfaces[event.entity.surface_index]
+  local area = event.entity.selection_box
   
   clear_area(surface, area, storage.settings.lawnmower_building_clear_range)
 end)
 
 script.on_event(defines.events.on_robot_built_entity, function(event)
-  if event.created_entity.type == "entity-ghost" or event.created_entity.type == "tile-ghost" or not event.created_entity.prototype.selectable_in_game then return end
-  local surface = game.surfaces[event.created_entity.surface_index]
-  local area = event.created_entity.selection_box
+  if event.entity.type == "entity-ghost" or event.entity.type == "tile-ghost" or not event.entity.prototype.selectable_in_game then return end
+  local surface = game.surfaces[event.entity.surface_index]
+  local area = event.entity.selection_box
   
   clear_area(surface, area, storage.settings.lawnmower_building_clear_range)
 end)
