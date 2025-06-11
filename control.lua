@@ -7,9 +7,23 @@ function clear_area(surface, area, range)
     area.right_bottom.y = area.right_bottom.y + range
   end
   surface.destroy_decoratives({area = area})
+  
+  local temp_inventory = nil
+  if (storage.settings.lawnmower_drop_minable_items) then
+    temp_inventory = game.create_inventory(0)
+  end
+  
   local corpses = surface.find_entities_filtered({area = area, type="corpse"})
   for _, corpse in pairs(corpses) do
+    if corpse.minable and storage.settings.lawnmower_drop_minable_items then
+      local position = corpse.position
+      local result = corpse.mine{inventory = temp_inventory}
+    end
     corpse.destroy()
+  end
+  
+  if (storage.settings.lawnmower_drop_minable_items) then
+    temp_inventory.destroy()
   end
 end
 
@@ -67,12 +81,14 @@ end)
 -- SETTINGS & INITIALIZATION
 
 script.on_event(defines.events.on_runtime_mod_setting_changed, function(event)
-  if event.setting ~= "lawnmower-building-clear-range" then return end
+  if event.setting ~= "lawnmower-building-clear-range" and event.setting ~= "lawnmower-drop-minable-items" then return end
   storage.settings = {}
   storage.settings.lawnmower_building_clear_range = settings.global["lawnmower-building-clear-range"].value
+  storage.settings.lawnmower_drop_minable_items = settings.global["lawnmower-drop-minable-items"].value
 end)
 
 script.on_init(function()
   storage.settings = {}
   storage.settings.lawnmower_building_clear_range = settings.global["lawnmower-building-clear-range"].value
+  storage.settings.lawnmower_drop_minable_items = settings.global["lawnmower-drop-minable-items"].value
 end)
